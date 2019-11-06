@@ -1,35 +1,33 @@
 import random
 import os
 
-specialChars = '&%$!?@'
+specialChars = '&%$!?@#'
 
 fVerbs = None
 fAdjective = None
 fNouns = None
 
-v = 0
-a = 0
-n = 0
+vTotal = 0
+aTotal = 0
+nTotal = 0
 
 try:
     fVerbs = open('verbs.txt')
     fAdjectives = open('adjectives.txt')
     fNouns = open('nouns.txt')
 
-    v = sum(1 for line in open('verbs.txt')) 
-    a = sum(1 for line in open('adjectives.txt')) 
-    n = sum(1 for line in open('nouns.txt')) 
+    vTotal = sum(1 for line in open('verbs.txt')) 
+    aTotal = sum(1 for line in open('adjectives.txt')) 
+    nTotal = sum(1 for line in open('nouns.txt')) 
 
 except Exception as e:
     print('One or more word files could not be opened')
     print(e)
 
-print('Total possibilities with current wordlists and special characters:')
-print('{:,}'.format(v * a * n * len(specialChars)))
 
-v = random.randint(1, v)
-a = random.randint(1, a)
-n = random.randint(1, n)
+v = random.randint(1, vTotal)
+a = random.randint(1, aTotal)
+n = random.randint(1, nTotal)
 
 password = ''
 
@@ -50,5 +48,8 @@ for i, word in enumerate(fNouns):
         password = password + word.rstrip().title()
     elif i > n:
         break
+
 password = password + random.choice(specialChars)
-print('\nPassword: ', password)
+print('\nTotal possibilities with current wordlists and special characters:')
+print('{:,}'.format(vTotal * aTotal * nTotal * len(specialChars)))
+print('\nPassword: ', password, '\n')
