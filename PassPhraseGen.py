@@ -1,6 +1,8 @@
 import random
 import os
 
+specialChars = '&%$!?@'
+
 fVerbs = None
 fAdjective = None
 fNouns = None
@@ -21,6 +23,9 @@ try:
 except Exception as e:
     print('One or more word files could not be opened')
     print(e)
+
+print('Total possibilities with current wordlists and special characters:')
+print('{:,}'.format(v * a * n * len(specialChars)))
 
 v = random.randint(1, v)
 a = random.randint(1, a)
@@ -45,6 +50,5 @@ for i, word in enumerate(fNouns):
         password = password + word.rstrip().title()
     elif i > n:
         break
-specialChars = '&%$!?'
 password = password + random.choice(specialChars)
-print(password)
+print('\nPassword: ', password)
